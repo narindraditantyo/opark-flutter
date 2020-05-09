@@ -1,16 +1,25 @@
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mobile_app/screens/logged/activity.dart';
+import 'package:mobile_app/screens/logged/book.dart';
+import 'package:mobile_app/screens/logged/event.dart';
+import 'package:mobile_app/screens/logged/payment.dart';
+import 'package:mobile_app/screens/logged/profile.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeComp(),
-      // routes: {
-      //   '/activityPage'
-      // },
+      routes: {
+        '/bookPage': (context) => LocationComp(),
+        '/activityPage': (context) => ActivityComp(),
+        '/eventPage': (context) => EventComp(),
+        '/paymentPage': (context) => PaymentComp(),
+        '/profilePage': (context) => ProfileComp(),
+      },
     );
   }
 }
@@ -21,200 +30,313 @@ class HomeComp extends StatefulWidget {
 }
 
 class _HomeCompState extends State<HomeComp> {
-  GoogleMapController mapController;
-
-  void _onMapCreated(GoogleMapController controller) {
-    setState(() {
-      mapController = controller;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(-7.24917, 112.75083),
-              zoom: 12,
+      backgroundColor: Color(0xffF5F6F8),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Row(
+          children: <Widget>[
+            Image.asset(
+              'assets/icons/app-logo-transparent.png',
+              width: 36.0,
             ),
-            myLocationEnabled: true,
-            zoomControlsEnabled: false,
-          ),
-          Container(
-            margin: EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  child: RaisedButton(
-                    onPressed: () {
-
-                    },
-                    color: Color(0xffF5F6F8),
-                    elevation: 4.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 16.0,
-                      horizontal: 32.0,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 64.0,
-                          height: 64.0,
-                          child: Container(
-                            color: Color(0xffAAAAAA),
-                          ),
-                        ),
-                        SizedBox(width: 16.0),
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                  'Gregorius Agung',
-                                  style: GoogleFonts.nunitoSans(
-                                    color: Color(0xff121212),
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              FlatButton(
-                                onPressed: () {
-
-                                },
-                                color: Color(0xffAAAAAA),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0)
-                                ),
-                                child: Text('Data Not Available'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: SizedBox(
-                          child: RaisedButton(
-                            onPressed: () {
-
-                            },
-                            color: Color(0xff388E3C),
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                            ),
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              children: <Widget>[
-                                Icon(
-                                  LineAwesomeIcons.car,
-                                  color: Color(0xffF5F6F8),
-                                  size: 48.0,
-                                ),
-                                SizedBox(height: 4.0),
-                                Text(
-                                  'Book',
-                                  style: GoogleFonts.nunitoSans(
-                                    color: Color(0xffF5F6F8),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      Expanded(
-                        child: SizedBox(
-                          child: RaisedButton(
-                            onPressed: () {
-                              
-                            },
-                            color: Color(0xff388E3C),
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                            ),
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              children: <Widget>[
-                                Icon(
-                                  LineAwesomeIcons.clipboard,
-                                  color: Color(0xffF5F6F8),
-                                  size: 48.0,
-                                ),
-                                SizedBox(height: 4.0),
-                                Text(
-                                  'Activities',
-                                  style: GoogleFonts.nunitoSans(
-                                    color: Color(0xffF5F6F8),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      Expanded(
-                        child: SizedBox(
-                          child: RaisedButton(
-                            onPressed: () {
-                              
-                            },
-                            color: Color(0xff388E3C),
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                            ),
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              children: <Widget>[
-                                Icon(
-                                  LineAwesomeIcons.calendar,
-                                  color: Color(0xffF5F6F8),
-                                  size: 48.0,
-                                ),
-                                SizedBox(height: 4.0),
-                                Text(
-                                  'Events',
-                                  style: GoogleFonts.nunitoSans(
-                                    color: Color(0xffF5F6F8),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            SizedBox(width: 8.0),
+            Text(
+              'oPark',
+              style: GoogleFonts.comfortaa(
+                color: Color(0xffF5F6F8),
+                fontSize: 20.0,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.5,
+              ),
+            )
+          ],
+        ),
+        actions: <Widget>[
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/profilePage');
+            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: Container(
+              margin: EdgeInsets.only(right: 16.0),
+              width: 32.0,
+              height: 32.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xff121212).withOpacity(0.12),
+                    blurRadius: 8.0,
+                    offset: Offset(4.0, 4.0),
+                  )
+                ],
+              ),
+              child: Image.asset(
+                'assets/icons/plain_profile.png'
+              ),
             ),
           )
         ],
-      )
+      ),
+      extendBodyBehindAppBar: true,
+      body: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xffFFA000), Color(0xff388E3C)],
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(28.0),
+                    bottomRight: Radius.circular(28.0),
+                  )
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    SizedBox(height: 72.0),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'Hai, ',
+                          style: GoogleFonts.lato(
+                            color: Color(0xffF5F6F8),
+                            fontSize: 24.0,
+                          ),
+                        ),
+                        Text(
+                          'Gregorius Agung',
+                          style: GoogleFonts.lato(
+                            color: Color(0xffF5F6F8),
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 4.0),
+                    Text(
+                      'Mau pergi kemana hari ini?',
+                      style: GoogleFonts.lato(
+                        color: Color(0xffF5F6F8),
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    SizedBox(height: 44.0),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(16.0, 169.0, 16.0, 0),
+                padding: EdgeInsets.symmetric(
+                  vertical: 16.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffF5F6F8),
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xff121212).withOpacity(0.24),
+                      blurRadius: 8.0,
+                      offset: Offset(4.0, 4.0),
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/bookPage');
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xff388E3C),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(
+                              LineAwesomeIcons.car,
+                              color: Color(0xffF5F6F8),
+                              size: 36.0,
+                            ),
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            'Book',
+                            style: GoogleFonts.lato(
+                              color: Color(0xff121212),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      )
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/activityPage');
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xff388E3C),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(
+                              LineAwesomeIcons.clipboard,
+                              color: Color(0xffF5F6F8),
+                              size: 36.0,
+                            ),
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            'Activity',
+                            style: GoogleFonts.lato(
+                              color: Color(0xff121212),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      )
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/eventPage');
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xff388E3C),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(
+                              LineAwesomeIcons.calendar,
+                              color: Color(0xffF5F6F8),
+                              size: 36.0,
+                            ),
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            'Event',
+                            style: GoogleFonts.lato(
+                              color: Color(0xff121212),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      )
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/paymentPage');
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xff388E3C),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(
+                              LineAwesomeIcons.credit_card,
+                              color: Color(0xffF5F6F8),
+                              size: 36.0,
+                            ),
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            'Payment',
+                            style: GoogleFonts.lato(
+                              color: Color(0xff121212),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      )
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 32.0),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Latest Promo',
+                      style: GoogleFonts.lato(
+                        color: Color(0xff121212),
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Text(
+                        'MORE',
+                        style: GoogleFonts.lato(
+                          color: Color(0xffAAAAAA),
+                          fontSize: 12.0,
+                        )
+                      ),
+                    )
+                  ],
+                ),
+               
+                SizedBox(height: 8.0),
+                // CarouselSlider(
+                //   items: ,
+                //   options: CarouselOptions(
+                //     aspectRatio: 4/3,
+                //     initialPage: 0,
+                //     enableInfiniteScroll: false,
+                //     scrollDirection: Axis.horizontal,
+                //   ),
+                // ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

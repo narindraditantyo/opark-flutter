@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 
-class EventComp extends StatefulWidget {
+class PaymentComp extends StatefulWidget {
   @override
-  _EventCompState createState() => _EventCompState();
+  _PaymentCompState createState() => _PaymentCompState();
 }
 
-class _EventCompState extends State<EventComp> {
+class _PaymentCompState extends State<PaymentComp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _EventCompState extends State<EventComp> {
                 ),
                 SizedBox(width: 16.0),
                 Text(
-                  'Events',
+                  'Payment Methods',
                   style: GoogleFonts.lato(
                     color: Color(0xff121212),
                     fontSize: 24.0,
