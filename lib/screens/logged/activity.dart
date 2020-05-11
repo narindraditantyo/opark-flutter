@@ -27,6 +27,7 @@ class _ActivityCompState extends State<ActivityComp> {
                       padding: EdgeInsets.all(0.0),
                       width: 24.0,
                       child: IconButton(
+                        padding: EdgeInsets.all(0.0),
                         icon: Icon(
                           LineAwesomeIcons.arrow_left,
                           size: 20.0,
@@ -51,7 +52,7 @@ class _ActivityCompState extends State<ActivityComp> {
                 ),
                 InkWell(
                   onTap: () {
-                    
+                    Navigator.pushNamed(context, '/historyPage');
                   },
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
@@ -68,7 +69,7 @@ class _ActivityCompState extends State<ActivityComp> {
             ),
             SizedBox(height: 24.0),
             Text(
-              'Current Activities',
+              'Current Booking',
               style: GoogleFonts.lato(
                 color: Color(0xff121212),
                 fontSize: 16.0,
@@ -161,7 +162,55 @@ class _HistoryCompState extends State<HistoryComp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      backgroundColor: Color(0xffF5F6F8),
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 24.0),
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(0.0),
+                  width: 24.0,
+                  child: IconButton(
+                    padding: EdgeInsets.all(0.0),
+                    icon: Icon(
+                      LineAwesomeIcons.arrow_left,
+                      size: 20.0,
+                    ),
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                SizedBox(width: 16.0),
+                Text(
+                  'History',
+                  style: GoogleFonts.lato(
+                    color: Color(0xff121212),
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w700
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 24.0),
+            Text(
+              'Past Booking',
+              style: GoogleFonts.lato(
+                color: Color(0xff121212),
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 16.0),
+          ],
+        )
+      ),
     );
   }
 }

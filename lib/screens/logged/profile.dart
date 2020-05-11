@@ -23,6 +23,7 @@ class _ProfileCompState extends State<ProfileComp> {
                   padding: EdgeInsets.all(0.0),
                   width: 24.0,
                   child: IconButton(
+                    padding: EdgeInsets.all(0.0),
                     icon: Icon(
                       LineAwesomeIcons.arrow_left,
                       size: 20.0,
@@ -44,7 +45,18 @@ class _ProfileCompState extends State<ProfileComp> {
                   ),
                 )
               ],
-            )
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Halaman ini belum tersedia, mohon bersabar ya!',
+                  style: GoogleFonts.lato(
+                    color: Color(0xffAAAAAA),
+                    fontSize: 14.0
+                  ),
+                ),
+              ),
+            ),
           ],
         )
       ),

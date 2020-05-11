@@ -23,6 +23,7 @@ class _EventCompState extends State<EventComp> {
                   padding: EdgeInsets.all(0.0),
                   width: 24.0,
                   child: IconButton(
+                    padding: EdgeInsets.all(0.0),
                     icon: Icon(
                       LineAwesomeIcons.arrow_left,
                       size: 20.0,
@@ -42,9 +43,20 @@ class _EventCompState extends State<EventComp> {
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700
                   ),
-                )
+                ),
               ],
-            )
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Lagi nggak ada event nih, cek lagi besok ya!',
+                  style: GoogleFonts.lato(
+                    color: Color(0xffAAAAAA),
+                    fontSize: 14.0
+                  ),
+                ),
+              ),
+            ),
           ],
         )
       ),

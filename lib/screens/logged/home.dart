@@ -14,8 +14,13 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       home: HomeComp(),
       routes: {
-        '/bookPage': (context) => LocationComp(),
+        '/homePage': (context) => HomePage(),
+        '/pickLocation': (context) => LocationComp(),
+        '/chooseSlot': (context) => ParkingComp(),
+        '/bookSummary': (context) => SummaryComp(),
+        '/confirmBook': (context) => Confirmation(),
         '/activityPage': (context) => ActivityComp(),
+        '/historyPage': (context) => HistoryComp(),
         '/eventPage': (context) => EventComp(),
         '/paymentPage': (context) => PaymentComp(),
         '/profilePage': (context) => ProfileComp(),
@@ -85,6 +90,7 @@ class _HomeCompState extends State<HomeComp> {
       ),
       extendBodyBehindAppBar: true,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Stack(
             children: <Widget>[
@@ -155,132 +161,144 @@ class _HomeCompState extends State<HomeComp> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/bookPage');
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/pickLocation');
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xff388E3C),
-                              borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        width: 56.0,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xff388E3C),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Icon(
+                                LineAwesomeIcons.plus,
+                                color: Color(0xffF5F6F8),
+                                size: 24.0,
+                              ),
                             ),
-                            child: Icon(
-                              LineAwesomeIcons.car,
-                              color: Color(0xffF5F6F8),
-                              size: 36.0,
+                            SizedBox(height: 4.0),
+                            Text(
+                              'Book',
+                              style: GoogleFonts.lato(
+                                color: Color(0xff121212),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4.0),
-                          Text(
-                            'Book',
-                            style: GoogleFonts.lato(
-                              color: Color(0xff121212),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ),
-                    FlatButton(
-                      onPressed: () {
+                    InkWell(
+                      onTap: () {
                         Navigator.pushNamed(context, '/activityPage');
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xff388E3C),
-                              borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        width: 56.0,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xff388E3C),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Icon(
+                                LineAwesomeIcons.clipboard,
+                                color: Color(0xffF5F6F8),
+                                size: 24.0,
+                              ),
                             ),
-                            child: Icon(
-                              LineAwesomeIcons.clipboard,
-                              color: Color(0xffF5F6F8),
-                              size: 36.0,
+                            SizedBox(height: 4.0),
+                            Text(
+                              'Activity',
+                              style: GoogleFonts.lato(
+                                color: Color(0xff121212),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4.0),
-                          Text(
-                            'Activity',
-                            style: GoogleFonts.lato(
-                              color: Color(0xff121212),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ),
-                    FlatButton(
-                      onPressed: () {
+                    InkWell(
+                      onTap: () {
                         Navigator.pushNamed(context, '/eventPage');
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xff388E3C),
-                              borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        width: 56.0,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xff388E3C),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Icon(
+                                LineAwesomeIcons.calendar,
+                                color: Color(0xffF5F6F8),
+                                size: 24.0,
+                              ),
                             ),
-                            child: Icon(
-                              LineAwesomeIcons.calendar,
-                              color: Color(0xffF5F6F8),
-                              size: 36.0,
+                            SizedBox(height: 4.0),
+                            Text(
+                              'Event',
+                              style: GoogleFonts.lato(
+                                color: Color(0xff121212),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4.0),
-                          Text(
-                            'Event',
-                            style: GoogleFonts.lato(
-                              color: Color(0xff121212),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ),
-                    FlatButton(
-                      onPressed: () {
+                    InkWell(
+                      onTap: () {
                         Navigator.pushNamed(context, '/paymentPage');
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xff388E3C),
-                              borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        width: 56.0,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xff388E3C),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Icon(
+                                LineAwesomeIcons.credit_card,
+                                color: Color(0xffF5F6F8),
+                                size: 24.0,
+                              ),
                             ),
-                            child: Icon(
-                              LineAwesomeIcons.credit_card,
-                              color: Color(0xffF5F6F8),
-                              size: 36.0,
+                            SizedBox(height: 4.0),
+                            Text(
+                              'Payment',
+                              style: GoogleFonts.lato(
+                                color: Color(0xff121212),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4.0),
-                          Text(
-                            'Payment',
-                            style: GoogleFonts.lato(
-                              color: Color(0xff121212),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ),
                   ],
@@ -290,52 +308,87 @@ class _HomeCompState extends State<HomeComp> {
           ),
           SizedBox(height: 32.0),
           Container(
-            alignment: Alignment.topLeft,
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Latest Promo',
-                      style: GoogleFonts.lato(
-                        color: Color(0xff121212),
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
+                Text(
+                  'Latest Promo',
+                  style: GoogleFonts.lato(
+                    color: Color(0xff121212),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  width: 264.0,
+                  decoration: BoxDecoration(
+                    color: Color(0xfff5f6f8),
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xff121212).withOpacity(0.24),
+                        blurRadius: 8.0,
+                        offset: Offset(4.0, 4.0),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-
-                      },
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      child: Text(
-                        'MORE',
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        height: 80.0,
+                        color: Color(0xffDEDEDE),
+                      ),
+                      SizedBox(height: 16.0),
+                      Text(
+                        'Cashback 25% dengan OVO',
+                        style: GoogleFonts.lato(
+                          color: Color(0xff121212),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 4.0),
+                      Text(
+                        'Hari ini',
                         style: GoogleFonts.lato(
                           color: Color(0xffAAAAAA),
-                          fontSize: 12.0,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
                         )
-                      ),
-                    )
-                  ],
-                ),
-               
-                SizedBox(height: 8.0),
-                // CarouselSlider(
-                //   items: ,
-                //   options: CarouselOptions(
-                //     aspectRatio: 4/3,
-                //     initialPage: 0,
-                //     enableInfiniteScroll: false,
-                //     scrollDirection: Axis.horizontal,
-                //   ),
-                // ),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        backgroundColor: Color(0xff388E3C),
+        icon: Icon(
+          LineAwesomeIcons.qrcode,
+          color: Color(0xffF5F6F8),
+          size: 24.0,
+        ),
+        label: Text(
+          'Scan',
+          style: GoogleFonts.lato(
+            color: Color(0xffF5F6F8),
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }

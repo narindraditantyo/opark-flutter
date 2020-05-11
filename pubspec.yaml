@@ -26,7 +26,8 @@ dependencies:
   line_awesome_icons: ^1.0.4+2
   google_fonts: ^1.0.0
   sliding_up_panel: ^1.0.2
-  carousel_slider: ^2.1.0
+  # carousel_slider: ^2.1.0
+  # flutter_spinkit: ^4.1.2+1
 
   #Geo-location plugins
   google_maps_flutter: ^0.5.26+2
@@ -76,7 +77,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/app-logo-transparent.png
+    - assets/icons/app-logo-splash.png
     - assets/icons/plain_profile.png
+    - assets/parking-dummy.png
+    - assets/summary-dummy.png
 
     #Transportation illustrations
     - assets/icons/transportation/car.png
