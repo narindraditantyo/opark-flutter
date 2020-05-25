@@ -2,32 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
-import 'package:mobile_app/screens/logged/activity.dart';
-import 'package:mobile_app/screens/logged/book.dart';
-import 'package:mobile_app/screens/logged/event.dart';
-import 'package:mobile_app/screens/logged/payment.dart';
-import 'package:mobile_app/screens/logged/profile.dart';
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeComp(),
-      routes: {
-        '/homePage': (context) => HomePage(),
-        '/pickLocation': (context) => LocationComp(),
-        '/chooseSlot': (context) => ParkingComp(),
-        '/bookSummary': (context) => SummaryComp(),
-        '/confirmBook': (context) => Confirmation(),
-        '/activityPage': (context) => ActivityComp(),
-        '/historyPage': (context) => HistoryComp(),
-        '/eventPage': (context) => EventComp(),
-        '/paymentPage': (context) => PaymentComp(),
-        '/profilePage': (context) => ProfileComp(),
-      },
-    );
-  }
-}
 
 class HomeComp extends StatefulWidget {
   @override
@@ -142,168 +116,197 @@ class _HomeCompState extends State<HomeComp> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(16.0, 169.0, 16.0, 0),
-                padding: EdgeInsets.symmetric(
-                  vertical: 16.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xffF5F6F8),
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xff121212).withOpacity(0.24),
-                      blurRadius: 8.0,
-                      offset: Offset(4.0, 4.0),
-                    )
-                  ],
-                ),
+              IntrinsicHeight(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/pickLocation');
-                      },
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
+                    Expanded(
                       child: Container(
-                        width: 56.0,
-                        child: Column(
+                        margin: EdgeInsets.only(
+                          left: 16.0,
+                          top: 169.0,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 16.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xffF5F6F8),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            bottomLeft: Radius.circular(8.0),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff121212).withOpacity(0.24),
+                              blurRadius: 8.0,
+                              offset: Offset(4.0, 4.0),
+                            )
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xff388E3C),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Icon(
-                                LineAwesomeIcons.plus,
-                                color: Color(0xffF5F6F8),
-                                size: 24.0,
-                              ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/pickLocation');
+                              },
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              child: Container(
+                                width: 56.0,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                        color: Color(0xff388E3C),
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                      child: Icon(
+                                        LineAwesomeIcons.plus,
+                                        color: Color(0xffF5F6F8),
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                      'Book',
+                                      style: GoogleFonts.lato(
+                                        color: Color(0xff121212),
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
                             ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Book',
-                              style: GoogleFonts.lato(
-                                color: Color(0xff121212),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/activityPage');
+                              },
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              child: Container(
+                                width: 56.0,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                        color: Color(0xff388E3C),
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                      child: Icon(
+                                        LineAwesomeIcons.clipboard,
+                                        color: Color(0xffF5F6F8),
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                      'Activity',
+                                      style: GoogleFonts.lato(
+                                        color: Color(0xff121212),
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/eventPage');
+                              },
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              child: Container(
+                                width: 56.0,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                        color: Color(0xff388E3C),
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                      child: Icon(
+                                        LineAwesomeIcons.calendar,
+                                        color: Color(0xffF5F6F8),
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                      'Event',
+                                      style: GoogleFonts.lato(
+                                        color: Color(0xff121212),
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
                             ),
                           ],
                         ),
-                      )
+                      ),
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/activityPage');
+
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       child: Container(
-                        width: 56.0,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xff388E3C),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Icon(
-                                LineAwesomeIcons.clipboard,
-                                color: Color(0xffF5F6F8),
-                                size: 24.0,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Activity',
-                              style: GoogleFonts.lato(
-                                color: Color(0xff121212),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                        margin: EdgeInsets.only(
+                          top: 169.0,
+                          right: 16.0,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xff388E3C),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(8.0),
+                            bottomRight: Radius.circular(8.0),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff121212).withOpacity(0.24),
+                              blurRadius: 8.0,
+                              offset: Offset(4.0, 4.0),
                             ),
                           ],
                         ),
-                      )
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/eventPage');
-                      },
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      child: Container(
-                        width: 56.0,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xff388E3C),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Icon(
-                                LineAwesomeIcons.calendar,
-                                color: Color(0xffF5F6F8),
-                                size: 24.0,
-                              ),
+                            Icon(
+                              LineAwesomeIcons.qrcode,
+                              color: Color(0xffF5F6F8),
+                              size: 40.0,
                             ),
-                            SizedBox(height: 4.0),
                             Text(
-                              'Event',
+                              'Scan',
                               style: GoogleFonts.lato(
-                                color: Color(0xff121212),
+                                color: Color(0xffF5F6F8),
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                              )
+                            )
                           ],
                         ),
-                      )
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/paymentPage');
-                      },
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      child: Container(
-                        width: 56.0,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xff388E3C),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Icon(
-                                LineAwesomeIcons.credit_card,
-                                color: Color(0xffF5F6F8),
-                                size: 24.0,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Payment',
-                              style: GoogleFonts.lato(
-                                color: Color(0xff121212),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
+                      ),
                     ),
                   ],
                 ),
-              )
+              ),
+              
             ],
           ),
           SizedBox(height: 32.0),
@@ -321,74 +324,11 @@ class _HomeCompState extends State<HomeComp> {
                   ),
                 ),
                 SizedBox(height: 8.0),
-                Container(
-                  padding: EdgeInsets.all(16.0),
-                  width: 264.0,
-                  decoration: BoxDecoration(
-                    color: Color(0xfff5f6f8),
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff121212).withOpacity(0.24),
-                        blurRadius: 8.0,
-                        offset: Offset(4.0, 4.0),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        height: 80.0,
-                        color: Color(0xffDEDEDE),
-                      ),
-                      SizedBox(height: 16.0),
-                      Text(
-                        'Cashback 25% dengan OVO',
-                        style: GoogleFonts.lato(
-                          color: Color(0xff121212),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(height: 4.0),
-                      Text(
-                        'Hari ini',
-                        style: GoogleFonts.lato(
-                          color: Color(0xffAAAAAA),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                        )
-                      )
-                    ],
-                  ),
-                )
+                // TODO: Carousel slider for 'latest promo' section
               ],
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-
-        },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        backgroundColor: Color(0xff388E3C),
-        icon: Icon(
-          LineAwesomeIcons.qrcode,
-          color: Color(0xffF5F6F8),
-          size: 24.0,
-        ),
-        label: Text(
-          'Scan',
-          style: GoogleFonts.lato(
-            color: Color(0xffF5F6F8),
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
       ),
     );
   }

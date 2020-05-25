@@ -1,7 +1,5 @@
 class User {
+  final String userUID;
 
-  final String uid;
-
-  User({ this.uid });
-
+  User({ this.userUID });
 }
