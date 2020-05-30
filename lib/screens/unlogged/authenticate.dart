@@ -12,7 +12,10 @@ class _AuthenticateState extends State<Authenticate> {
     return Scaffold(
       backgroundColor: Color(0xffF5F6F8),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(
+          vertical: 24.0,
+          horizontal: 16.0,
+        ),
         child: Column(
           children: <Widget>[
             Expanded(

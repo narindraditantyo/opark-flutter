@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mobile_app/services/auth.dart';
+import 'package:mobile_app/services/database.dart';
 
 class HomeComp extends StatefulWidget {
   @override
@@ -9,6 +11,14 @@ class HomeComp extends StatefulWidget {
 }
 
 class _HomeCompState extends State<HomeComp> {
+  final AuthService _auth = AuthService();
+
+  Future<String> _getDispName() async {
+    String userUID = await _auth.getCurrentUID();
+    String dispName = await DatabaseService(userUID: userUID).getDispName();
+    return Future.value(dispName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,14 +104,24 @@ class _HomeCompState extends State<HomeComp> {
                             fontSize: 24.0,
                           ),
                         ),
-                        Text(
-                          'Gregorius Agung',
-                          style: GoogleFonts.lato(
-                            color: Color(0xffF5F6F8),
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        )
+                        FutureBuilder<String>(
+                          future: _getDispName(),
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if(snapshot.hasData) {
+                              return Text(
+                                '${snapshot.data}',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              );
+                            } else {
+                              return Text('');
+                            }
+                          },
+                        ),
+                        
                       ],
                     ),
                     SizedBox(height: 4.0),
@@ -306,7 +326,6 @@ class _HomeCompState extends State<HomeComp> {
                   ],
                 ),
               ),
-              
             ],
           ),
           SizedBox(height: 32.0),

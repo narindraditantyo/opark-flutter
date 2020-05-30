@@ -24,6 +24,9 @@ class _RegisterPageState extends State<RegisterPage> {
   String errorPass = '';
   String errorConfirm = '';
 
+  bool _securePass = true;
+  bool _secureConfirm = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +109,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'e.g. John Doe'
+                            hintText: 'e.g. John Doe',
+                            errorStyle: TextStyle(
+                              height: 0,
+                            )
                           ),
                         ),
                       ),
@@ -214,7 +220,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'e.g. john.doe@email.com'
+                            hintText: 'e.g. john.doe@email.com',
+                            errorStyle: TextStyle(
+                              height: 0,
+                            )
                           ),
                         ),
                       ),
@@ -272,10 +281,25 @@ class _RegisterPageState extends State<RegisterPage> {
                               passInput = input;
                             });
                           },
-                          obscureText: true,
+                          obscureText: _securePass,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'min. 8 characters',
+                            errorStyle: TextStyle(
+                              height: 0,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _securePass ? LineAwesomeIcons.eye_slash : LineAwesomeIcons.eye
+                              ),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onPressed: () {
+                                setState(() {
+                                  _securePass = !_securePass;
+                                });
+                              },
+                            )
                           ),
                         ),
                       ),
@@ -323,10 +347,25 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             }
                           },
-                          obscureText: true,
+                          obscureText: _secureConfirm,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'min. 8 characters',
+                            errorStyle: TextStyle(
+                              height: 0,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _secureConfirm ? LineAwesomeIcons.eye_slash : LineAwesomeIcons.eye
+                              ),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onPressed: () {
+                                setState(() {
+                                  _secureConfirm = !_secureConfirm;
+                                });
+                              },
+                            )
                           ),
                         ),
                       ),
@@ -334,7 +373,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       InkWell(
                         onTap: () async {
                           if(_formKey.currentState.validate()) {
-                            dynamic result = await _auth.registerEmailPassword(nameInput, dateInput, emailInput.trim(), passInput);
+                            dynamic result = await _auth.registerEmailPassword(
+                              nameInput,
+                              nameInput.indexOf(' ') == null ? nameInput : nameInput.substring(0, nameInput.indexOf(' ')),
+                              dateInput,
+                              emailInput.trim(),
+                              passInput
+                            );
 
                             if(result == null) {
                               setState(() {

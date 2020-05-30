@@ -20,6 +20,12 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _secureText = true;
 
+  void _togglePass() {
+    setState(() {
+      _secureText = !_secureText;
+    });
+  }
+
   @override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -88,10 +94,12 @@ class _LoginPageState extends State<LoginPage> {
                               setState(() {
                                 errorEmail = ' tidak boleh dikosongi';
                               });
+                              return '';
                             } else if(!input.contains('@')) {
                               setState(() {
                                 errorEmail = ' tidak valid';
                               });
+                              return '';
                             } else {
                               setState(() {
                                 errorEmail = '';
@@ -107,7 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'e.g. john.doe@email.com'
+                            hintText: 'e.g. john.doe@email.com',
+                            errorStyle: TextStyle(
+                              height: 0,
+                            )
                           ),
                         ),
                       ),
@@ -147,10 +158,12 @@ class _LoginPageState extends State<LoginPage> {
                               setState(() {
                                 errorPass = ' tidak boleh dikosongi';
                               });
+                              return '';
                             } else if(input.length < 8) {
                               setState(() {
                                 errorPass = ' kurang dari 8 karakter';
                               });
+                              return '';
                             } else {
                               setState(() {
                                 errorPass = '';
@@ -167,13 +180,18 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'min. 8 characters',
+                            errorStyle: TextStyle(
+                              height: 0,
+                            ),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _secureText ? LineAwesomeIcons.eye_slash : LineAwesomeIcons.eye
                               ),
                               splashColor: Colors.transparent,
                               highlightColor: Colors.transparent,
-                              onPressed: null,
+                              onPressed: () {
+                                _togglePass();
+                              },
                             )
                           ),
                         ),
