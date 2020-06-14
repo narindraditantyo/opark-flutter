@@ -20,13 +20,13 @@ class MainApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Wrapper(),
         routes: {
           '/loginPage': (context) => LoginPage(),
           '/registerPage': (context) => RegisterPage(),
           '/homePage': (context) => HomeComp(),
           '/pickLocation': (context) => LocationComp(),
-          '/chooseSlot': (context) => ParkingComp(),
           '/bookSummary': (context) => SummaryComp(),
           '/confirmBook': (context) => Confirmation(),
           '/activityPage': (context) => ActivityComp(),

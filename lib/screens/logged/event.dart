@@ -16,7 +16,7 @@ class _EventCompState extends State<EventComp> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 24.0),
+            SizedBox(height: 16.0),
             Row(
               children: <Widget>[
                 Container(
@@ -40,7 +40,7 @@ class _EventCompState extends State<EventComp> {
                   'Events',
                   style: GoogleFonts.lato(
                     color: Color(0xff121212),
-                    fontSize: 24.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w700
                   ),
                 ),

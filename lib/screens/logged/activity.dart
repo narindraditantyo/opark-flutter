@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mobile_app/services/auth.dart';
+import 'package:mobile_app/services/database.dart';
 
 class ActivityComp extends StatefulWidget {
   @override
@@ -8,6 +10,14 @@ class ActivityComp extends StatefulWidget {
 }
 
 class _ActivityCompState extends State<ActivityComp> {
+  final AuthService _auth = AuthService();
+  
+  Future<String> _checkAct() async {
+    String userUID = await _auth.getCurrentUID();
+    String dispName = await DatabaseService(userUID: userUID).checkAct();
+    return Future.value(dispName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +27,7 @@ class _ActivityCompState extends State<ActivityComp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 24.0),
+            SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -44,7 +54,7 @@ class _ActivityCompState extends State<ActivityComp> {
                       'Activities',
                       style: GoogleFonts.lato(
                         color: Color(0xff121212),
-                        fontSize: 24.0,
+                        fontSize: 20.0,
                         fontWeight: FontWeight.w700
                       ),
                     )
@@ -77,75 +87,6 @@ class _ActivityCompState extends State<ActivityComp> {
               ),
             ),
             SizedBox(height: 16.0),
-            InkWell(
-              onTap: () {
-                
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 16.0,
-                  horizontal: 32.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xffF5F6F8),
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xff121212).withOpacity(0.24),
-                      blurRadius: 8.0,
-                      offset: Offset(4.0, 4.0),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/icons/transportation/car.png',
-                      scale: 3,
-                    ),
-                    SizedBox(width: 16.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Today, 13:40',
-                          style: GoogleFonts.lato(
-                            color: Color(0xffAAAAAA),
-                            fontSize: 12.0,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Tunjungan Plaza Surabaya',
-                          style: GoogleFonts.lato(
-                            color: Color(0xff121212),
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        Container(
-                          padding: EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            color: Color(0xff121212),
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          child: Text(
-                            'L 1234 XY',
-                            style: GoogleFonts.lato(
-                              color: Color(0xffF5F6F8),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ],
         )
       ),
@@ -168,7 +109,7 @@ class _HistoryCompState extends State<HistoryComp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 24.0),
+            SizedBox(height: 16.0),
             Row(
               children: <Widget>[
                 Container(
@@ -192,7 +133,7 @@ class _HistoryCompState extends State<HistoryComp> {
                   'History',
                   style: GoogleFonts.lato(
                     color: Color(0xff121212),
-                    fontSize: 24.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w700
                   ),
                 )

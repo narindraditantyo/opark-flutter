@@ -375,7 +375,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           if(_formKey.currentState.validate()) {
                             dynamic result = await _auth.registerEmailPassword(
                               nameInput,
-                              nameInput.indexOf(' ') == null ? nameInput : nameInput.substring(0, nameInput.indexOf(' ')),
+                              (' '.allMatches(nameInput).length) < 2 ? nameInput : nameInput.substring(0, nameInput.indexOf(' ', nameInput.indexOf(' ') + 1)),
                               dateInput,
                               emailInput.trim(),
                               passInput

@@ -1,21 +1,13 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:mobile_app/models/location.dart';
 
 class DatabaseService {
   final String userUID;
   
   DatabaseService({ this.userUID });
 
-  // final CollectionReference userCollection = Firestore.instance.collection('user');
-  
-  // Future updateUserData(String name, String birthDate, String email, String password) async {
-  //   return await userCollection.document(userUID).setData({
-  //     'name': name,
-  //     'birthDate': birthDate,
-  //     'email': email,
-  //     'password': password,
-  //   });
-  // }
+  List<Location> listItems = [];
 
   final DatabaseReference dbRef = FirebaseDatabase.instance.reference();
 
@@ -37,31 +29,44 @@ class DatabaseService {
   //   })
   // }
 
-  // Get user data
+  // Get user dispName
   Future<String> getDispName() async {
     DataSnapshot snapshot = await dbRef.child('users/$userUID/dispName').once();
     String dispName = snapshot.value;
     return Future.value(dispName);
+  }
 
-    // dbRef.child('users/$userUID/dispName').once().then((DataSnapshot snapshot) {
-    //   dispName = snapshot.value;
-    //   return dispName;
-    // });
-
-    // print(dispName);
-    // return dispName;
-
-    // StreamBuilder<Event> (
-    //   stream: dbRef.child('users/$userUID').onValue,
-    //   builder: (context, event) {
-    //     Map<dynamic, dynamic> data = event.data.snapshot.value;
-    //     data.values.toList()[index]['dispName'];
-    //   },
-    // );
+  // Get user fullName
+  Future<String> getFullName() async {
+    DataSnapshot snapshot = await dbRef.child('users/$userUID/fullName').once();
+    String fullName = snapshot.value;
+    return Future.value(fullName);
   }
 
   // Update user data
 
 
-  // 
+  // // Get location data
+  // Future<List<Location>> getLocation() async {
+  //   dbRef.child('locations').once().then((DataSnapshot snapshot) {
+  //     Map<dynamic, dynamic> locationList = snapshot.value;
+  //     locationList.forEach((key, value) {
+
+  //     })
+  //   });
+  // }
+
+  // Check activity existence
+  Future checkAct() async {
+    DataSnapshot snapshot = await dbRef.child('users/$userUID/activityList').once();
+    return snapshot.value;
+  }
+
+  // Add booking
+  addBooking(String selectedLoc, String selectedSlot) {
+    dbRef.child('users/$userUID/activityList').push().set({
+      'location': selectedLoc,
+      'slot': selectedSlot,
+    });
+  }
 }
