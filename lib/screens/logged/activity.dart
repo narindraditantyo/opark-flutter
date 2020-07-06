@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
-import 'package:mobile_app/services/auth.dart';
-import 'package:mobile_app/services/database.dart';
 
 class ActivityComp extends StatefulWidget {
   @override
@@ -10,14 +8,7 @@ class ActivityComp extends StatefulWidget {
 }
 
 class _ActivityCompState extends State<ActivityComp> {
-  final AuthService _auth = AuthService();
   
-  Future<String> _checkAct() async {
-    String userUID = await _auth.getCurrentUID();
-    String dispName = await DatabaseService(userUID: userUID).checkAct();
-    return Future.value(dispName);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

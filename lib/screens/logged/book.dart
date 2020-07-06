@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,11 +16,105 @@ class LocationComp extends StatefulWidget {
 
 class _LocationCompState extends State<LocationComp> {
   GoogleMapController mapController;
+
+  final DatabaseReference dbRef = FirebaseDatabase.instance.reference();
+
+  String avail = 'Available';
+  String statA01;
+  String statA02;
+  String statA03;
+  String statB01;
+  String statB02;
+  String statB03;
+  int sisaSlot = 0;
   
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
       mapController = controller;
     });
+  }
+
+  Future<String> getSlotA01() async {
+    DataSnapshot snapshot = await dbRef.child('locations/A01/status').once();
+    setState(() {
+      statA01 = snapshot.value;
+
+      if(statA01 == avail) {
+        sisaSlot++;
+      }
+    });
+    return statA01;
+  }
+
+  Future<String> getSlotA02() async {
+    DataSnapshot snapshot = await dbRef.child('locations/A02/status').once();
+    setState(() {
+      statA02 = snapshot.value;
+
+      if(statA02 == avail) {
+        sisaSlot++;
+      }
+    });
+    return statA02;
+  }
+
+  Future<String> getSlotA03() async {
+    DataSnapshot snapshot = await dbRef.child('locations/A03/status').once();
+    setState(() {
+      statA03 = snapshot.value;
+
+      if(statA03 == avail) {
+        sisaSlot++;
+      }
+    });
+    return statA03;
+  }
+
+  Future<String> getSlotB01() async {
+    DataSnapshot snapshot = await dbRef.child('locations/B01/status').once();
+    setState(() {
+      statB01 = snapshot.value;
+
+      if(statB01 == avail) {
+        sisaSlot++;
+      }
+    });
+    return statB01;
+  }
+
+  Future<String> getSlotB02() async {
+    DataSnapshot snapshot = await dbRef.child('locations/B02/status').once();
+    setState(() {
+      statB02 = snapshot.value;
+
+      if(statB02 == avail) {
+        sisaSlot++;
+      }
+    });
+    return statB02;
+  }
+
+  Future<String> getSlotB03() async {
+    DataSnapshot snapshot = await dbRef.child('locations/B03/status').once();
+    setState(() {
+      statB03 = snapshot.value;
+
+      if(statB03 == avail) {
+        sisaSlot++;
+      }
+    });
+    return statB03;
+  }
+
+  @override
+  void initState() {
+    getSlotA01();
+    getSlotA02();
+    getSlotA03();
+    getSlotB01();
+    getSlotB02();
+    getSlotB03();
+    super.initState();
   }
   
   @override
@@ -104,7 +199,15 @@ class _LocationCompState extends State<LocationComp> {
               InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) => ParkingComp(selectedLoc: 'Grand City Surabaya')
+                    builder: (BuildContext context) => ParkingComp(
+                      selectedLoc: 'Grand City Surabaya',
+                      statA01: statA01,
+                      statA02: statA02,
+                      statA03: statA03,
+                      statB01: statB01,
+                      statB02: statB02,
+                      statB03: statB03,
+                    )
                   ));
                 },
                 child: Container(
@@ -149,6 +252,25 @@ class _LocationCompState extends State<LocationComp> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
+                          SizedBox(height: 4.0),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4.0,
+                              horizontal: 8.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: sisaSlot < 3 ? Color(0xffE53935) : Color(0xff388E3C),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: Text(
+                              'Tersedia $sisaSlot lot',
+                              style: GoogleFonts.lato(
+                                color: Color(0xffF5F6F8),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -165,14 +287,22 @@ class _LocationCompState extends State<LocationComp> {
 
 class ParkingComp extends StatefulWidget {
   final String selectedLoc;
+  final String statA01;
+  final String statA02;
+  final String statA03;
+  final String statB01;
+  final String statB02;
+  final String statB03;
 
-  ParkingComp({ this.selectedLoc });
+  ParkingComp({ this.selectedLoc, this.statA01, this.statA02, this.statA03, this.statB01, this.statB02, this.statB03 });
 
   @override
   _ParkingCompState createState() => _ParkingCompState();
 }
 
 class _ParkingCompState extends State<ParkingComp> {
+  String avail = 'Available';
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,179 +327,207 @@ class _ParkingCompState extends State<ParkingComp> {
           bottom: 16.0,
           right: 16.0,
         ),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                widget.selectedLoc,
-                style: GoogleFonts.lato(
-                  color: Color(0xff121212),
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w700,
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              widget.selectedLoc,
+              style: GoogleFonts.lato(
+                color: Color(0xff121212),
+                fontSize: 24.0,
+                fontWeight: FontWeight.w700,
               ),
-              SizedBox(height: 8.0),
-              Text(
-                'Pilih lokasi parkir Anda',
-                style: GoogleFonts.lato(
-                  color: Color(0xff121212),
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                )
-              ),
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Divider(
-                            color: Color(0xff121212),
-                          ),
-                          InkWell(
-                            onTap: () {
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              'Pilih lokasi parkir Anda',
+              style: GoogleFonts.lato(
+                color: Color(0xff121212),
+                fontSize: 20.0,
+                fontWeight: FontWeight.w500,
+              )
+            ),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            if(widget.statA01 == avail) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) => SummaryComp(selectedLoc: 'Grand City Surabaya', selectedSlot: 'A01')
                               ));
-                            },
-                            child: Container(
-                              height: 48.0,
-                              width: 128.0,
-                              color: Color(0xffDEDEDE),
-                              child: Center(
-                                child: Text(
-                                  'A01'
+                            }
+                          },
+                          child: Container(
+                            height: 48.0,
+                            width: 128.0,
+                            color: widget.statA01 == avail ? Color(0xff43A047) : Color(0xffE53935),
+                            child: Center(
+                              child: Text(
+                                'A01',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(width: 32.0),
-                          InkWell(
-                            onTap: () {
+                        ),
+                        SizedBox(width: 32.0),
+                        InkWell(
+                          onTap: () {
+                            if(widget.statB01 == avail) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) => SummaryComp(selectedLoc: 'Grand City Surabaya', selectedSlot: 'B01')
                               ));
-                            },
-                            child: Container(
-                              height: 48.0,
-                              width: 128.0,
-                              color: Color(0xffDEDEDE),
-                              child: Center(
-                                child: Text(
-                                  'B01'
+                            }
+                          },
+                          child: Container(
+                            height: 48.0,
+                            width: 128.0,
+                            color: widget.statB01 == avail ? Color(0xff43A047) : Color(0xffE53935),
+                            child: Center(
+                              child: Text(
+                                'B01',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
                           ),
-                          Divider(
-                            color: Color(0xff121212),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Divider(
-                            color: Color(0xff121212),
-                          ),
-                          InkWell(
-                            onTap: () {
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            if(widget.statA02 == avail) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) => SummaryComp(selectedLoc: 'Grand City Surabaya', selectedSlot: 'A02')
                               ));
-                            },
-                            child: Container(
-                              height: 48.0,
-                              width: 128.0,
-                              color: Color(0xffDEDEDE),
-                              child: Center(
-                                child: Text(
-                                  'A02'
+                            }
+                          },
+                          child: Container(
+                            height: 48.0,
+                            width: 128.0,
+                            color: widget.statA02 == avail ? Color(0xff43A047) : Color(0xffE53935),
+                            child: Center(
+                              child: Text(
+                                'A02',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(width: 32.0),
-                          InkWell(
-                            onTap: () {
+                        ),
+                        SizedBox(width: 32.0),
+                        InkWell(
+                          onTap: () {
+                            if(widget.statB02 == avail) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) => SummaryComp(selectedLoc: 'Grand City Surabaya', selectedSlot: 'B02')
                               ));
-                            },
-                            child: Container(
-                              height: 48.0,
-                              width: 128.0,
-                              color: Color(0xffDEDEDE),
-                              child: Center(
-                                child: Text(
-                                  'B02'
+                            }
+                          },
+                          child: Container(
+                            height: 48.0,
+                            width: 128.0,
+                            color: widget.statB02 == avail ? Color(0xff43A047) : Color(0xffE53935),
+                            child: Center(
+                              child: Text(
+                                'B02',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
                           ),
-                          Divider(
-                            color: Color(0xff121212),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Divider(
-                            color: Color(0xff121212),
-                          ),
-                          InkWell(
-                            onTap: () {
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            if(widget.statA03 == avail) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) => SummaryComp(selectedLoc: 'Grand City Surabaya', selectedSlot: 'A03')
                               ));
-                            },
-                            child: Container(
-                              height: 48.0,
-                              width: 128.0,
-                              color: Color(0xffDEDEDE),
-                              child: Center(
-                                child: Text(
-                                  'A03'
+                            }
+                          },
+                          child: Container(
+                            height: 48.0,
+                            width: 128.0,
+                            color: widget.statA03 == avail ? Color(0xff43A047) : Color(0xffE53935),
+                            child: Center(
+                              child: Text(
+                                'A03',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(width: 32.0),
-                          InkWell(
-                            onTap: () {
+                        ),
+                        SizedBox(width: 32.0),
+                        InkWell(
+                          onTap: () {
+                            if(widget.statB03 == avail) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) => SummaryComp(selectedLoc: 'Grand City Surabaya', selectedSlot: 'B03')
                               ));
-                            },
-                            child: Container(
-                              height: 48.0,
-                              width: 128.0,
-                              color: Color(0xffDEDEDE),
-                              child: Center(
-                                child: Text(
-                                  'B03'
+                            }
+                          },
+                          child: Container(
+                            height: 48.0,
+                            width: 128.0,
+                            color: widget.statB03 == avail ? Color(0xff43A047) : Color(0xffE53935),
+                            child: Center(
+                              child: Text(
+                                'B03',
+                                style: GoogleFonts.lato(
+                                  color: Color(0xffF5F6F8),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
                           ),
-                          Divider(
-                            color: Color(0xff121212),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         )
       ),
     );
@@ -378,11 +536,18 @@ class _ParkingCompState extends State<ParkingComp> {
 
 class SummaryComp extends StatelessWidget {
   final AuthService _auth = AuthService();
+  final DatabaseReference dbRef = FirebaseDatabase.instance.reference();
 
   final String selectedLoc;
   final String selectedSlot;
 
   SummaryComp({ this.selectedLoc, this.selectedSlot });
+
+  setSlotStatus(String pickedSlot) {
+    dbRef.child('locations/$pickedSlot').set({
+      'status': 'Booked',
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -624,6 +789,7 @@ class SummaryComp extends StatelessWidget {
               onPressed: () async {
                 String userUID = await _auth.getCurrentUID();
                 await DatabaseService(userUID: userUID).addBooking(selectedLoc, selectedSlot);
+                setSlotStatus(selectedSlot);
                 Navigator.pushNamed(context, '/confirmBook');
               },
               padding: EdgeInsets.all(16.0),

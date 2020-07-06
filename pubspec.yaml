@@ -38,12 +38,11 @@ dependencies:
   geolocator: ^5.3.1
   
   #Firebase services
-  firebase_core: ^0.4.4+3
-  cloud_firestore: ^0.13.5
-  firebase_database: ^3.1.5
+  firebase_core: ^0.4.5
+  firebase_database: ^3.1.6
 
   #Authentication services
-  firebase_auth: ^0.16.0
+  firebase_auth: ^0.16.1
   google_sign_in: ^4.4.4
 
   rxdart: ^0.24.0

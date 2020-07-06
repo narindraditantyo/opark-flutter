@@ -1,4 +1,3 @@
-// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
@@ -326,25 +325,6 @@ class _HomeCompState extends State<HomeComp> {
                 ),
               ),
             ],
-          ),
-          SizedBox(height: 32.0),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Latest Promo',
-                  style: GoogleFonts.lato(
-                    color: Color(0xff121212),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                // TODO: Carousel slider for 'latest promo' section
-              ],
-            ),
           ),
         ],
       ),
